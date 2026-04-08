@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { History, ExternalLink, Calendar, Database, Shield, Trash2 } from 'lucide-react';
-import { History, ExternalLink, Calendar, Database, Shield, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import logo from '../assets/logo.png';
 
