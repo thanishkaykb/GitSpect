@@ -20,11 +20,11 @@ const Auth = ({ onLogin }) => {
 
     try {
       if (isLogin) {
-        const res = await axios.post('/api/auth/login', { email, password });
+        const res = await axios.post('https://gitspect.onrender.com/api/auth/login', { email, password });
         localStorage.setItem('token', res.data.access_token);
         onLogin(res.data.access_token);
       } else {
-        await axios.post('/api/auth/register', { email, password });
+        await axios.post('https://gitspect.onrender.com/api/auth/register', { email, password });
         setMessage("Success! Verification link printed to terminal console.");
         setIsLogin(true);
       }
