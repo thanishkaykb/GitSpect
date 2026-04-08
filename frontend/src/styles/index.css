@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Outfit', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0a0a0c;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl shadow-2xl;
+  }
+  
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-sm border border-white/[0.05] rounded-xl transition-all duration-300 hover:bg-white/[0.06] hover:border-white/10;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-2 bg-primary hover:bg-blue-600 rounded-lg font-semibold transition-all duration-300 active:scale-95 shadow-lg shadow-primary/20;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-2 bg-secondary/20 hover:bg-secondary/30 text-white rounded-lg font-semibold transition-all duration-300 active:scale-95 border border-white/10;
+  }
+  
+  .input-field {
+    @apply w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 focus:border-primary/50 focus:outline-none transition-colors duration-300;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+pre, code {
+  font-family: 'JetBrains Mono', monospace;
+}
