@@ -4,7 +4,6 @@ sqlalchemy
 pydantic[email]
 python-jose[cryptography]
 passlib[bcrypt]
-google-genai
+google-generativeai
 gitpython
 python-dotenv
-cors
