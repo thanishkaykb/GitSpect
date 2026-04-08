@@ -28,7 +28,8 @@ app = FastAPI(title="GitSpect API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # TEMP FIX
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
