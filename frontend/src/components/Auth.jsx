@@ -19,6 +19,7 @@ const Auth = ({ onLogin }) => {
     setMessage(null);
 
     try {
+      console.log("LOGIN BUTTON CLICKED");
       if (isLogin) {
         const res = await axios.post('https://gitspect.onrender.com/api/auth/login', { email, password });
         localStorage.setItem('token', res.data.access_token);
