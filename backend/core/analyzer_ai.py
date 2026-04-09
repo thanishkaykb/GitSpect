@@ -5,14 +5,16 @@ import tempfile
 import json
 import time
 from typing import List, Dict
-from google import genai
-from google.genai import types
+import google.generativeai as genai
 
 class BugAnalyzer:
     def __init__(self, api_key: str):
         self.api_key = api_key
-        # Initialize Gemini Client
-        self.client = genai.Client(api_key=self.api_key) if self.api_key else None
+
+        print("GEMINI KEY LOADED:", bool(self.api_key))  # debug
+
+        if self.api_key:
+            genai.configure(api_key=self.api_key)
 
     def clone_repo(self, repo_url: str):
         temp_dir = tempfile.mkdtemp()
@@ -43,7 +45,7 @@ class BugAnalyzer:
         return files_to_scan[:12]
 
     async def analyze_repo(self, repo_url: str) -> Dict:
-        if not self.api_key or not self.client:
+        if not self.api_key:
             return {"summary": "Gemini API Key missing.", "bugs": []}
             
         repo_path = self.clone_repo(repo_url)
@@ -78,19 +80,13 @@ class BugAnalyzer:
             {all_content}
             """
             
-            print("[*] Requesting analysis from Gemini API...")
             
             # Simple retry mechanism for quota limitations
+            print("[*] Requesting analysis from Gemini API...")
+            model = genai.GenerativeModel("gemini-2.5-flash")
             for attempt in range(3):
                 try:
-                    response = self.client.models.generate_content(
-                        model='gemini-2.5-flash',
-                        contents=prompt,
-                        config=types.GenerateContentConfig(
-                            response_mime_type="application/json",
-                            temperature=0.1
-                        )
-                    )
+                    response = model.generate_content(prompt)
                     text = response.text
                     try:
                         return json.loads(text.strip())
